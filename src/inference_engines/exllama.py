@@ -1,8 +1,12 @@
 import os
+import sys
 import glob
 import torch
 import time
 from src.config_utils import Weights
+
+exllama_path = os.path.abspath("exllama")
+sys.path.insert(0, exllama_path)
 
 from .engine import Engine
 from exllama.model import ExLlama, ExLlamaCache, ExLlamaConfig
