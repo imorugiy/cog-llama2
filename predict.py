@@ -27,10 +27,10 @@ class Predictor(BasePredictor):
         prompt: str = Input(
             description="Prompt to send to the model.", default=DEFAULT_PROMPT
         ),
-        system_prompt: str = Input(
-            description="System prompt that helps guide system behavior",
-            default="You are a helpful, respectful and honest assistant",
-        ),
+        # system_prompt: str = Input(
+        #     description="System prompt that helps guide system behavior",
+        #     default="You are a helpful, respectful and honest assistant",
+        # ),
         max_new_tokens: int = Input(
             description="Maximum number of tokens to generate. A word is generally 2-3 tokens",
             ge=1,
@@ -86,6 +86,6 @@ class Predictor(BasePredictor):
             repetition_penalty=repetition_penalty,
         )
 
-        output = pipe(prompt)[0]
-
-        return output["generated_text"]
+        output = pipe(prompt)[0]["generated_text"]
+        final = output.split("ASSISTANT:")
+        return final[-1]
