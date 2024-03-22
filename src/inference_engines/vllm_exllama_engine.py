@@ -5,12 +5,12 @@ import torch
 import os
 
 from .engine import Engine
-from .exllama import ExllamaEngine
+from .exllama import ExllamaV2Engine
 
 
 class ExllamaVllmEngine(Engine):
 
     def __init__(self, vllm_args: dict, exllama_args: dict) -> None:
 
-        self.engine = ExllamaEngine(**exllama_args)
+        self.engine = ExllamaV2Engine(**exllama_args)
         self.vllm_args = vllm_args

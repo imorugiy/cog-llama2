@@ -20,3 +20,4 @@ vllm/
 *.egg-info/
 venv
 token.txt
+cache
