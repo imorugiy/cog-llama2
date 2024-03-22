@@ -1,0 +1,19 @@
+build:
+  gpu: true
+  cuda: "11.8"
+
+  python_version: 3.11
+
+  python_packages:
+    - "protobuf"
+    - "sentencepiece==0.1.99"
+    - "transformers==4.33.2"
+    - "tensorflow"
+    - "accelerate"
+    - "https://r2.drysys.workers.dev/torch/11.8/torch-2.1.0-cp311-cp311-linux_x86_64.whl"
+  
+  run:
+    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.1.1/pget" && chmod +x /usr/local/bin/pget
+    - bash -c 'ln -s /usr/local/lib/python3.11/site-packages/torch/lib/lib{nv,cu}* /usr/lib'
+
+predict: "predict.py:Predictor"
