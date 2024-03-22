@@ -19,3 +19,4 @@ vllm/
 .dockerignore
 *.egg-info/
 venv
+token.txt
