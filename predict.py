@@ -8,8 +8,6 @@ from transformers import (
 MODEL_NAME = "TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ"
 MODEL_CACHE = "cache"
 
-DEFAULT_PROMPT = "Tell me about AI"
-
 
 class Predictor(BasePredictor):
     def setup(self):
@@ -25,7 +23,7 @@ class Predictor(BasePredictor):
     def predict(
         self,
         prompt: str = Input(
-            description="Prompt to send to the model.", default=DEFAULT_PROMPT
+            description="Prompt to send to the model.", default="Tell me about AI"
         ),
         # system_prompt: str = Input(
         #     description="System prompt that helps guide system behavior",
@@ -60,20 +58,6 @@ class Predictor(BasePredictor):
         ),
     ) -> str:
 
-        # input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids().cuda()
-        # outputs = self.model.generate(
-        #     inputs=input_ids,
-        #     temperature=temperature,
-        #     top_k=top_k,
-        #     top_p=top_p,
-        #     repetition_penalty=repetition_penalty,
-        #     max_new_tokens=max_new_tokens,
-        # )
-
-        # output = self.tokenizer.decode(outputs[0])
-
-        # print(output)
-
         pipe = pipeline(
             "text-generation",
             model=self.model,
@@ -87,5 +71,5 @@ class Predictor(BasePredictor):
         )
 
         output = pipe(prompt)[0]["generated_text"]
-        final = output.split("ASSISTANT:")
+        final = output.split("WOMAN:")
         return final[-1]
